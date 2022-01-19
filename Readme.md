@@ -180,8 +180,26 @@ clean : ;
 .PHONY: test server install clean update
 ```
 
+### GOland文件三端编译
+
+```makefile
+# 三端编译
+cross_build: build_windows build-linux build_mac
+build-linux:
+	CGO_ENABLED=0 GOOS=linux GOARCH=amd64 $(GOBUILD) -o $(BINARY_UNIX) -v
+
+build_windows:
+	CGO_ENABLED=1 GOOS=windows GOARCH=amd64 $(GOBUILD) -o $(BINARY_WIN) -v
+
+build_mac:
+	CGO_ENABLED=0 GOOS=darwin GOARCH=amd64 $(GOBUILD) -o $(BUILD_MAC) -v
+```
+
+只需要`make cross_build`即可
+
 ## 参考：
 
 http://www.ruanyifeng.com/blog/2015/02/make.html
 
 https://seisman.github.io/how-to-write-makefile/introduction.html
+

@@ -23,6 +23,7 @@ run:
 
 
 # 三端编译
+cross_build: build_windows build-linux build_mac
 build-linux:
 	CGO_ENABLED=0 GOOS=linux GOARCH=amd64 $(GOBUILD) -o $(BINARY_UNIX) -v
 
@@ -31,6 +32,9 @@ build_windows:
 
 build_mac:
 	CGO_ENABLED=0 GOOS=darwin GOARCH=amd64 $(GOBUILD) -o $(BUILD_MAC) -v
+
+
+
 
 exec_win:
 	@./main_win.exe
